@@ -7,5 +7,5 @@ srcDir = "src"
 
 requires "nim >= 1.6.8"
 requires "zippy >= 0.10.9"
-requires "webby >= 0.2.1"
+requires "https://github.com/jdelgadoalfonso/webby.git#fix/nim-2.3-distinct-seq"
 requires "crunchy >= 0.1.11"

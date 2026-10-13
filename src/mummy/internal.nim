@@ -51,7 +51,7 @@ proc encodeHeaders*(
 
   # Calculate the header buffer len in advance to just do one allocation
   var headersLen = statusLineLen
-  for (k, v) in headers:
+  for (k, v) in headers.toBase:
     # k + ": " + v + "\r\n"
     headersLen += k.len + 2 + v.len + 2
   # "\r\n"
@@ -80,7 +80,7 @@ proc encodeHeaders*(
   result[pos + 1] = '\n'
   pos += 2
 
-  for (k, v) in headers:
+  for (k, v) in headers.toBase:
     copyMem(
       result[pos].addr,
       k.cstring,

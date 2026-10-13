@@ -28,14 +28,14 @@ proc `[]`*(pathParams: PathParams, key: string): string =
 proc `[]=`*(pathParams: var PathParams, key, value: string) =
   ## Sets the value for the key. If the key is not present, this
   ## appends a new key-value pair to the end.
-  for pair in pathParams.mitems:
+  for pair in pathParams.toBase.mitems:
     if pair[0] == key:
       pair[1] = value
       return
   pathParams.add((key, value))
 
 proc contains*(pathParams: PathParams, key: string): bool =
-  for pair in pathParams:
+  for pair in pathParams.toBase:
     if pair[0] == key:
       return true
 

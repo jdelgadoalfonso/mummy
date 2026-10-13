@@ -190,7 +190,7 @@ proc headerContainsToken(headers: var HttpHeaders, key, token: string): bool =
   # If a header looks like `Accept-Encoding: gzip,deflate` then we may want to
   # check if the value contains a specific token (in this case gzip or deflate)
   # This proc does a case-insensitive check while avoiding allocations
-  for (k, v) in headers:
+  for (k, v) in headers.toBase:
     if cmpIgnoreCase(k, key) == 0:
       var first = 0
       while first < v.len:
@@ -926,7 +926,7 @@ proc afterRecvHttp(
       )
 
     var foundContentLength, foundTransferEncoding: bool
-    for (k, v) in dataEntry.requestState.headers:
+    for (k, v) in dataEntry.requestState.headers.toBase:
       if cmpIgnoreCase(k, "Content-Length") == 0:
         if foundContentLength:
           # This is a second Content-Length header, not valid
